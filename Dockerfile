@@ -1,4 +1,4 @@
-FROM hashicorp/packer:light as packer_image
+FROM hashicorp/packer:latest as packer_image
 
 FROM centos:7
 RUN yum install -y epel-release
@@ -17,10 +17,6 @@ RUN wget https://github.com/wata727/packer-post-processor-amazon-ami-management/
   cd $HOME/.packer.d/plugins && \
   unzip -j /tmp/packer-post-processor-amazon-ami-management_linux_amd64.zip -d $HOME/.packer.d/plugins/
 
-
-RUN wget https://github.com/stobias123/packer-post-processor-vsphere-template-management/releases/download/v0.1.2/packer-post-processor-vsphere-template-management_0.1.2_linux_amd64.zip -P /tmp/  && \
-  cd $HOME/.packer.d/plugins && \
-  unzip -j /tmp/packer-post-processor-vsphere-template-management_0.1.2_linux_amd64.zip -d $HOME/.packer.d/plugins/
 
 ## this script allows us to dynamically set our vault password.
 COPY files/vault-env /home/packer/.vault_pass
